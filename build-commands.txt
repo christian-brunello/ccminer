@@ -1,0 +1,6 @@
+make distclean
+autoreconf -i
+./configure
+make -j$(nproc)
+
+
