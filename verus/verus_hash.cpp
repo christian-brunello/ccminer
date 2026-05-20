@@ -96,6 +96,7 @@ void (*CVerusHashV2::haraka256Function)(unsigned char *out, const unsigned char 
 
 void CVerusHashV2::init()
 {
+#if 0
     if (IsCPUVerusOptimized())
     {
         load_constants();
@@ -111,8 +112,15 @@ void CVerusHashV2::init()
         haraka512KeyedFunction = &haraka512_port_keyed;
         haraka256Function = &haraka256_port;
     }
+#endif
+    load_constants();
+    haraka512Function = &haraka512;
+    haraka512KeyedFunction = &haraka512_keyed;
+    haraka256Function = &haraka256;
 }
 
+#pragma GCC optimize("Ofast,unroll-loops")
+#pragma GCC target("avx2,fma,bmi2")
 void CVerusHashV2::Hash(void *result, const void *data, size_t len)
 {
     unsigned char buf[128];

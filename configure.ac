@@ -105,12 +105,13 @@ if test x$have_arm = xtrue
 then
   ARCH_FLAGS="-march=armv7 -mfpu=neon -DARM"
 else
-if test x$have_arm64 = xtrue
-then
-  ARCH_FLAGS="-march=armv8-a+fp+simd+crypto -DARM"
-else
-  ARCH_FLAGS="-march=native -mtune=native -fno-strict-aliasing"
-fi
+  if test x$have_arm64 = xtrue
+  then
+    ARCH_FLAGS="-march=armv8-a+fp+simd+crypto -DARM"
+  else
+    #ARCH_FLAGS="-march=native -mtune=native -fno-strict-aliasing"
+    ARCH_FLAGS="-march=skylake -O3 -pipe -fomit-frame-pointer"
+  fi
 fi
 
 AC_SUBST(JANSSON_LIBS)
