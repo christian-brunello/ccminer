@@ -110,7 +110,7 @@ else
     ARCH_FLAGS="-march=armv8-a+fp+simd+crypto -DARM"
   else
     #ARCH_FLAGS="-march=native -mtune=native -fno-strict-aliasing"
-    ARCH_FLAGS="-march=skylake -O3 -pipe -fomit-frame-pointer"
+    ARCH_FLAGS="-march=native -mtune=native -O3 -pipe -fomit-frame-pointer -fno-strict-aliasing"
   fi
 fi
 
